@@ -5,6 +5,10 @@ import static org.mockito.ArgumentMatchers.matches;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.any;
+
+import java.util.HashMap;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -52,6 +56,14 @@ public class MainServiceTest {
 		
 		System.out.println("############## " + key);
 		assertEquals("mykeyyyyyyyyyyyy", key);
+	}
+	
+	@Test
+	public void testFillMap() {
+		HashMap<String, Object> map = spy(HashMap.class);
+		mainService.fillMap(map);
+		
+		verify(map, times(1)).put(matches("someKey"), any(String.class));
 	}
 	
 }

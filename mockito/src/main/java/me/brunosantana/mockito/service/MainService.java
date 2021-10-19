@@ -1,5 +1,7 @@
 package me.brunosantana.mockito.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -23,5 +25,9 @@ public class MainService {
 
 	public String getKey() {
 		return key;
+	}
+	
+	public void fillMap(Map<String, Object> map) {
+		map.put("someKey", "someValue");
 	}
 }
