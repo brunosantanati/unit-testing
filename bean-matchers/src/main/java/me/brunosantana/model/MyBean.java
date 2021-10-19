@@ -6,6 +6,7 @@ public class MyBean {
 	
 	private String field1;
 	private List<String> field2;
+	private String step;
 	
 	public MyBean(String field1, List<String> field2) {
 		super();
@@ -28,7 +29,19 @@ public class MyBean {
 	public void setField2(List<String> field2) {
 		this.field2 = field2;
 	}
+	
+	public void setWithDifferentNameFromField(String step) {
+		this.step = step;
+	}
 
+	public void setWithoutField(String field3) {
+		System.out.println("teste");
+	}
+	
+	public void setWhichThrowsException(String field4) {
+		throw new RuntimeException("erro");
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
