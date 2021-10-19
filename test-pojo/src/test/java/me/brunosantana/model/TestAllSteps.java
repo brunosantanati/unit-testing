@@ -1,5 +1,8 @@
 package me.brunosantana.model;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
 import java.util.ArrayList;
 
 import org.junit.Test;
@@ -25,6 +28,15 @@ public class TestAllSteps {
 		new AuthorizationChecker().setPossibleNextSteps(new ArrayList<Step>()); //testar quando o atributo tem o nome diferente do setter
 		new AuthorizationChecker().setTest(); //testar quando tem o setter mas não tem atributo
 		new AuthorizationChecker().setResponse(""); //testar quando tem o setter mas não tem atributo
+	}
+	
+	@Test
+	public void testThrowingException() {
+		RuntimeException e = assertThrows(RuntimeException.class, () -> {
+			new AuthorizationChecker().setResponse(""); //essa linha lança RuntimeException
+		});
+		
+		assertEquals("Does not make sense a response here", e.getMessage());
 	}
 
 }
