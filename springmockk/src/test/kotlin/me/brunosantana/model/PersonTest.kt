@@ -99,5 +99,19 @@ class PersonTest {
                 .isEqualTo(person2)
         }
 
+        @Test
+        fun `test example that shows the right order to pass the parameters`() {
+            val expected = Person(name = "Bruno", salary = BigDecimal("1000"))
+            val actual = Person(name = "Bruno", salary = BigDecimal("1000")) /*change the name in this line to Brunoo and you'll get this msg:
+            field/property 'name' differ:
+            - actual value  : "Brunoo"
+            - expected value: "Bruno"
+            */
+
+            AssertionsAssertj.assertThat(actual)
+                .usingRecursiveComparison()
+                .isEqualTo(expected)
+        }
+
     }
 }
