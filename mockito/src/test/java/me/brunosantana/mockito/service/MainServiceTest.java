@@ -9,16 +9,20 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.any;
 
 import java.util.HashMap;
+import java.util.Optional;
 
+import me.brunosantana.mockito.factory.PersonFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.class) //No trabalho usei @ExtendWith(MockitoExtension.class)
 public class MainServiceTest {
 	
 	@InjectMocks
@@ -26,6 +30,12 @@ public class MainServiceTest {
 	
 	@Mock
 	private OtherService otherService;
+
+	@Mock
+	private PersonFactory personFactory;
+
+	@Captor
+	ArgumentCaptor<Optional<String>> captor;
 	
 	@Before
 	public void setup() {
@@ -64,6 +74,17 @@ public class MainServiceTest {
 		mainService.fillMap(map);
 		
 		verify(map, times(1)).put(matches("someKey"), any(String.class));
+	}
+
+	@Test
+	public void testUsingArgumentCaptor() {
+
+		mainService.getPersonWithRandomName(1);
+
+		verify(personFactory, times(1)).create(captor.capture());
+
+		Optional<String> optional = captor.getValue();
+		assertEquals("Rumpelstiltskin", optional.orElse("INVALIDO"));
 	}
 	
 }
