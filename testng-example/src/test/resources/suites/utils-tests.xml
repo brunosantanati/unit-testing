@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Utils Suite" verbose="1">
+    <test name="Utils Testing">
+        <groups>
+            <run>
+                <include name="utils-group"/>
+            </run>
+        </groups>
+
+        <packages>
+            <package name="me.brunosantana.utils"/>
+        </packages>
+    </test>
+</suite>
